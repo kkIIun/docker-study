@@ -1,15 +1,16 @@
 FROM python:3.8
-ENV PYTHONUNBUFFERED 1
 
 # 이미지 생성 과정에서 실행할 명령어
-COPY ./requirements.txt requirements.txt
+WORKDIR /usr/src/app
+COPY . .
+
 RUN pip3 install -r requirements.txt
 
-# 이미지 내에서 명령어를 실행할(현 위치로 잡을) 디렉토리 설정
-COPY . code
-WORKDIR code
+WORKDIR ./apiStudy
 
-CMD ["python3", "manage.py", "runserver"]
+CMD ["python3", "manage.py", "runserver", "0.0.0.0:8000"]
+
+EXPOSE 8000
 
 # 이미지 생성 명령어 (현 파일과 같은 디렉토리에서)
 # docker build -t {이미지명} .
