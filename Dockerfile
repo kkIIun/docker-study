@@ -1,10 +1,10 @@
 FROM python:3.8
 
 # 이미지 생성 과정에서 실행할 명령어
+COPY requirements.txt /usr/src/app/requirements.txt
 WORKDIR /usr/src/app
-COPY . .
-
 RUN pip3 install -r requirements.txt
+COPY . /usr/src/app
 
 WORKDIR ./apiStudy
 
